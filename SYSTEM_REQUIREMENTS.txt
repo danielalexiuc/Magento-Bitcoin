@@ -1,0 +1,6 @@
+
+System Requirements
+-------------------
+ - Run an RPC Bitcoin server (bitoind or bitcoin-qt)
+ - PHP JSON-RPC
+ - PHP CURL

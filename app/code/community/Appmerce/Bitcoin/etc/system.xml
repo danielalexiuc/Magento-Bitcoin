@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Appmerce - Applications for Ecommerce
+* http://www.appmerce.com
+*
+* @extension   Bitcoin
+* @type        Extension
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* @category    Magento Commerce
+* @package     Appmerce_Bitcoin
+* @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <sections>
+        <payment translate="label" module="payment">
+            <label>Payment Methods</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>400</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <bitcoin translate="label">
+                    <label>Bitcoin (JSON-RPC)</label>
+                    <comment>
+                        <![CDATA[Free extension by <a href="http://www.appmerce.com/" title="Applications for Ecommerce" style="color: #EA7601">Appmerce</a> | <a href="http://www.appmerce.com/get-support" title="Get support for this extension" style="color: #EA7601">Get Support</a>]]>
+                    </comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment">
+                            <label>Enabled</label>
+                            <comment>
+                                <![CDATA[Before enabling check that you can access a secured Bitcoin wallet using JSON-RPC.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <pending_status translate="label">
+                            <label>Pending Payment Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bitcoin/source_pendingpayment</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </pending_status>
+                        <processing_status translate="label">
+                            <label>Processing Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </processing_status>
+                        <confirmations translate="label comment">
+                            <label>Minimum Confirmations</label>
+                            <comment>
+                                <![CDATA[Number of confirmations from the Bitcoin network before accepting a transaction.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bitcoin/source_confirmations</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </confirmations>
+                        <period translate="label comment">
+                            <label>Exchange Rate Cache Period</label>
+                            <comment>
+                                <![CDATA[Specify how often to refresh exchange rates from <a href="http://www.coindesk.com/price/" target="_blank">Coindesk.com</a>.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bitcoin/source_period</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </period>
+                        <rpc_ptcl translate="label comment">
+                            <label>JSON-RPC SSL</label>
+                            <comment>
+                                <![CDATA[Enable to use SSL on the original client daemon. You must also enable this in <a href="https://en.bitcoin.it/wiki/Enabling_SSL_on_original_client_daemon" target="_blank">bitcoin.conf</a>.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_ptcl>
+                        <rpc_user translate="label comment">
+                            <label>JSON-RPC Username</label>
+                            <comment>
+                                <![CDATA[Blockchain.info calls this the <em>Wallet Identifier</em>.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_user>
+                        <rpc_pass translate="label comment">
+                            <label>JSON-RPC Password</label>
+                            <comment>
+                                <![CDATA[Blockchain.info calls this the <em>Main Password</em>. Important: the password cannot have special characters such as $, % or ?]]>
+                            </comment>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <frontend_type>obscure</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_pass>
+                        <rpc_host translate="label comment">
+                            <label>JSON-RPC Hostname</label>
+                            <comment>
+                                <![CDATA[Enter <em>127.0.0.1</em> for localhost. Enter <em>rpc.blockchain.info</em> for Blockchain.info wallets.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_host>
+                        <rpc_port translate="label comment">
+                            <label>JSON-RPC Port</label>
+                            <comment>
+                                <![CDATA[Enter <em>8332</em> for default bitcoind. For Blockchain.info enter <em>443</em> with SSl, <em>80</em> without SSL.]]>
+                            </comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </rpc_port>
+                        <wallet_pass translate="label comment">
+                            <label>Bitcoin Wallet Passphrase</label>
+                            <comment>
+                                <![CDATA[Optional. Required for keypoolrefill. Not needed for Blockchain.info wallets. Important: the password cannot have special characters such as $, % or ?]]>
+                            </comment>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <frontend_type>obscure</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </wallet_pass>
+                        <debug_flag translate="label comment">
+                            <label>Debug Mode</label>
+                            <comment>
+                                <![CDATA[See database table <em>bitcoin_api_debug</em>.]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug_flag>
+                        <order_email translate="label">
+                            <label>Send Order Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_email>
+                        <invoice_create translate="label">
+                            <label>Create Invoice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </invoice_create>
+                        <invoice_email translate="label">
+                            <label>Send Invoice Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </invoice_email>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>180</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>190</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </specificcountry>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </max_order_total>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+                    </fields>
+                </bitcoin>
+            </groups>
+        </payment>
+    </sections>
+</config>

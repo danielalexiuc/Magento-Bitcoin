@@ -1,0 +1,63 @@
+
+@todo: add BTC currency + webservicex to Magento Core
+@todo: add support for refunds (new feature in bitcoind 0.9+)
+@todo: add support for moving funds to 'cold wallet'
+
+Appmerce Bitcoin for Magento Commerce, v1.8.0.0.2, 2013/11/09
+-------------------------------------------------------------
+ - Improved support for blockchain.info JSON-RPC
+ - Added Coindesk BPI prices to replace bitcoincharts
+ - Removed precision option: always 8 decimals for BTC prices
+ - Changd JSONRpcClient.php to use more secure curl() instead of fopen()
+ - Added price caching periods of 1h, 6h, removed 30d
+ - Added wallet passphrase support, for generating new addresses (when >100)
+ - Added https support for Coindesk prices
+ - Extended Bitcoin Client functions
+
+Appmerce Bitcoin for Magento Commerce, v1.8.0.0.1, 2013/09/26
+-------------------------------------------------------------
+ - CE 1.8 reboot
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.7, 2013/04/18
+-------------------------------------------------------------
+ - Improved package
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.6, 2013/04/17
+-------------------------------------------------------------
+ - furhter locale improvements
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.5, 2013/04/17
+-------------------------------------------------------------
+ - config.xml default pending status
+ - show BTC quote amount in form.phtml
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.4, 2013/04/17
+-------------------------------------------------------------
+ - Added Quote amount in info.html frontend
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.3, 2013/04/17
+-------------------------------------------------------------
+ - First release
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.2, 2013/04/16
+-------------------------------------------------------------
+ - Listen to bitcoind server (CRON) to update status
+ - Invoice PDF show address
+ - Choose minimum confirmations
+ - Choose precision
+
+Appmerce Bitcoin for Magento Commerce, v1.7.0.2.1, 2013/04/14
+-------------------------------------------------------------
+ - Show recipient addresses in Order history
+ - Generate new Bitcoin address based on website name / order number 
+   / customer email
+ - Generate QR code through Google
+ - Send order email with instructions on 'place order'
+ - Show 'process' page with payment instructions after place order
+ - Show 'confirm' button to finalize, but keep 'Pending Payment'
+ - Show payment instructions in order email, invoice email
+ - Use BTC conversion rate via bitcoincharts weighted
+ - Cache bitcoincharts conversion daily (24h)
+ - RPC username, login, SSL
+ - CRON check every 15 minutes
+ 

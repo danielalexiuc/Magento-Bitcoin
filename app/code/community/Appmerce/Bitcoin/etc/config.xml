@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Appmerce - Applications for Ecommerce
+* http://www.appmerce.com
+*
+* @extension   Bitcoin
+* @type        Extension
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+*
+* @category    Magento Commerce
+* @package     Appmerce_Bitcoin
+* @copyright   Copyright (c) 2011-2013 Appmerce (http://www.appmerce.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Appmerce_Bitcoin>
+            <version>0.1.0</version>
+        </Appmerce_Bitcoin>
+    </modules>
+    <global>
+        <models>
+            <bitcoin>
+                <class>Appmerce_Bitcoin_Model</class>
+                <resourceModel>bitcoin_mysql4</resourceModel>
+            </bitcoin>
+            <bitcoin_mysql4>
+                <class>Appmerce_Bitcoin_Model_Mysql4</class>
+                <entities>
+                    <api_debug>
+                        <table>bitcoin_api_debug</table>
+                    </api_debug>
+                </entities>
+            </bitcoin_mysql4>
+        </models>
+        <helpers>
+            <bitcoin>
+                <class>Appmerce_Bitcoin_Helper</class>
+            </bitcoin>
+        </helpers>
+        <resources>
+            <bitcoin_setup>
+                <setup>
+                    <module>Appmerce_Bitcoin</module>
+                    <class>Appmerce_Bitcoin_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </bitcoin_setup>
+            <bitcoin_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </bitcoin_write>
+            <bitcoin_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </bitcoin_read>
+        </resources>
+        <blocks>
+            <bitcoin>
+                <class>Appmerce_Bitcoin_Block</class>
+            </bitcoin>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <bitcoin>
+                    <file>appmerce/bitcoin/layout.xml</file>
+                </bitcoin>
+            </updates>
+        </layout>
+        <secure_url>
+            <bitcoin_api>/bitcoin/api</bitcoin_api>
+        </secure_url>
+        <routers>
+            <bitcoin>
+                <use>standard</use>
+                <args>
+                    <module>Appmerce_Bitcoin</module>
+                    <frontName>bitcoin</frontName>
+                </args>
+            </bitcoin>
+        </routers>
+        <translate>
+            <modules>
+                <Appmerce_Bitcoin>
+                    <files>
+                        <default>Appmerce_Bitcoin.csv</default>
+                    </files>
+                </Appmerce_Bitcoin>
+            </modules>
+        </translate>
+        <events>
+            <sales_model_service_quote_submit_after>
+                <observers>
+                    <bitcoin_observer>
+                        <type>singleton</type>
+                        <class>bitcoin/observer_submit</class>
+                        <method>sales_model_service_quote_submit_after</method>
+                    </bitcoin_observer>
+                </observers>
+            </sales_model_service_quote_submit_after>
+        </events>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Appmerce_Bitcoin>
+                    <files>
+                        <default>Appmerce_Bitcoin.csv</default>
+                    </files>
+                </Appmerce_Bitcoin>
+            </modules>
+        </translate>
+        <events>
+            <sales_order_invoice_save_before>
+                <observers>
+                    <bitcoin_observer>
+                        <type>singleton</type>
+                        <class>bitcoin/observer_invoice</class>
+                        <method>sales_order_invoice_save_before</method>
+                    </bitcoin_observer>
+                </observers>
+            </sales_order_invoice_save_before>
+            <sales_order_creditmemo_save_before>
+                <observers>
+                    <bitcoin_observer>
+                        <type>singleton</type>
+                        <class>bitcoin/observer_invoice</class>
+                        <method>sales_order_creditmemo_save_before</method>
+                    </bitcoin_observer>
+                </observers>
+            </sales_order_creditmemo_save_before>
+        </events>
+    </adminhtml>
+    <default>
+        <payment>
+            <bitcoin>
+                <title>Bitcoin</title>
+                <active>0</active>
+                <model>bitcoin/api</model>
+                <order_status>pending</order_status>
+                <pending_status>pending_payment</pending_status>
+                <processing_status>processing</processing_status>
+                <allowspecific>0</allowspecific>
+                <confirmations>6</confirmations>
+                <period>21600</period>
+                <rpc_pass backend_model="adminhtml/system_config_backend_encrypted"/>
+                <rpc_port>8332</rpc_port>
+                <rpc_host>127.0.0.1</rpc_host>
+                <wallet_pass backend_model="adminhtml/system_config_backend_encrypted"/>
+                <order_email>1</order_email>
+            </bitcoin>
+        </payment>
+    </default>
+    <crontab>
+        <jobs>
+            <bitcoin_status_check>
+                <schedule>
+                    <cron_expr>*/15 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>bitcoin/api_pull::transactionStatusCheck</model>
+                </run>
+            </bitcoin_status_check>
+        </jobs>
+    </crontab>
+</config>
