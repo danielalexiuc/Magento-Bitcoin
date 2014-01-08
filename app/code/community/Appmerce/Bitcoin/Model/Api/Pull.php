@@ -58,10 +58,10 @@ class Appmerce_Bitcoin_Model_Api_Pull extends Varien_Object
 
         // Database preparations
         $db = Mage::getSingleton('core/resource')->getConnection('core_read');
-        $orderTable = Mage::getSingleton('core/resource')->getTableName('sales_flat_order');
-        $orderPaymentTable = Mage::getSingleton('core/resource')->getTableName('sales_flat_order_payment');
+        $orderTable = Mage::getSingleton('core/resource')->getTable('sales_order');
+        $orderPaymentTable = Mage::getSingleton('core/resource')->getTable('sales_payment_transaction');
 
-        $result = $db->query('SELECT sfo.entity_id, sfop.last_trans_id
+        $result = $db->query('SELECT sfo.entity_id, sfop.transaction_id
             FROM ' . $orderTable . ' sfo 
             INNER JOIN ' . $orderPaymentTable . ' sfop 
             ON sfop.parent_id = sfo.entity_id 
